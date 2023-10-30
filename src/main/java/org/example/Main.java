@@ -32,6 +32,11 @@ public class Main {
         }
     }
 
+    /**
+     * asks the user for the value of the variable
+     * @param var the name of the variable whose value is to be retrieved
+     * @return real value of the variable received from the user
+     */
     private static double getValue(String var) {
             String val;
             while (true) {

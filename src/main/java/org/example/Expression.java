@@ -10,6 +10,12 @@ public class Expression {
     Stack<String> operators = new Stack<>();
     Stack<Double> operands = new Stack<>();
 
+    /**
+     * checks the given expression for correctness and, if the entry is correct, returns the result of the expression
+     * @param exp tested expression
+     * @return result of the expression
+     * @throws Exception an exception is thrown if the expression is written incorrectly or if arithmetic errors are found
+     */
     public double solve(String exp) throws Exception {
         exp = exp.replaceAll("\\s", "");
         List<String> tokens = getTokens(exp);
@@ -50,6 +56,12 @@ public class Expression {
         operators.pop();
     }
 
+    /**
+     * converts the expression into an array of tokens that will be used to find the result of the expression
+     * @param exp tested expression
+     * @return array of tokens
+     * @throws Exception an exception is thrown if the expression is written incorrectly
+     */
     private List<String> getTokens(String exp) throws Exception {
         List<String> tokens = new ArrayList<>();
         Stack<Character> brackets = new Stack<>();
@@ -94,6 +106,11 @@ public class Expression {
         return tokens;
     }
 
+    /**
+     * Prioritizing an arithmetic operation
+     * @param op operation to be checked
+     * @return priority of operation
+     */
     private int getPriority(String op) {
         return switch (op) {
             case "+", "-" -> 1;
@@ -102,6 +119,12 @@ public class Expression {
         };
     }
 
+    /**
+     * checks if one operation has a lower priority than another operation
+     * @param op1 operation one
+     * @param op2 operation two
+     * @return true if the first operation has a lower priority than the second operation
+     */
     private boolean hasLowerPriority(String op1, String op2) {
         if (op1.equals("+") && op2.equals("-")) {
             return true;
@@ -109,6 +132,14 @@ public class Expression {
         return getPriority(op1) < getPriority(op2);
     }
 
+    /**
+     * applies the operator to the two operands and calculates the value
+     * @param operator applicable operator
+     * @param var1 first operand
+     * @param var2 second operand
+     * @return  operation result
+     * @throws Exception exception if division by zero occurs
+     */
     private double calculate(String operator, double var1, double var2) throws Exception {
         switch (operator) {
             case "+":
